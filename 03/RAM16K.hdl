@@ -1,0 +1,31 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/3/b/RAM16K.hdl
+/**
+ * Memory of 16K 16-bit registers.
+ * If load is asserted, the value of the register selected by
+ * address is set to in; Otherwise, the value does not change.
+ * The value of the selected register is emitted by out.
+ */
+CHIP RAM16K {
+    IN in[16], load, address[14];
+    OUT out[16];
+
+    PARTS:
+    //// Replace this comment with your code.
+     DMux8Way(in= load, sel= address[0..2], a= load0, b= load1, c= load2, d= load3, e= load4, f= load5, g= load6, h= load7);
+    
+    
+    RAM512(in=in, load=load0, address=address[3..11], out=u0);
+    RAM512(in=in, load=load1, address=address[3..11], out=u1);
+    RAM512(in=in, load=load2, address=address[3..11], out=u2);
+    RAM512(in=in, load=load3, address=address[3..11], out=u3);
+    RAM512(in=in, load=load4, address=address[3..11], out=u4);
+    RAM512(in=in, load=load5, address=address[3..11], out=u5);
+    RAM512(in=in, load=load6, address=address[3..11], out=u6);
+    RAM512(in=in, load=load7, address=address[3..11], out=u7);
+
+    Mux8Way16(a= u0, b= u1, c= u2, d= u3, e= u4, f= u5, g= u6, h= u7, sel= address[0..2], out= out);
+
+}

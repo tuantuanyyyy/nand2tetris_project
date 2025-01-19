@@ -1,0 +1,33 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/3/a/RAM8.hdl
+/**
+ * Memory of eight 16-bit registers.
+ * If load is asserted, the value of the register selected by
+ * address is set to in; Otherwise, the value does not change.
+ * The value of the selected register is emitted by out.
+ */
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    //将address转为八个独立的信号位
+    DMux8Way(in=load, sel=address, a=load0, b=load1, c=load2, d=load3, e=load4, f=load5, g=load6, h=load7);
+
+    //通过这8个独立的信号位，作为RAM8的load
+    //这样总的而言就可以通过address选择特定的register了
+    Register(in=in, load=load0, out=u0);
+    Register(in=in, load=load1, out=u1);
+    Register(in=in, load=load2, out=u2);
+    Register(in=in, load=load3, out=u3);
+    Register(in=in, load=load4, out=u4);
+    Register(in=in, load=load5, out=u5);
+    Register(in=in, load=load6, out=u6);
+    Register(in=in, load=load7, out=u7);
+    
+    //然后再使用Mux8Way16 做多选一的操作，其实就是将上面的多个out选择选定的那个输出出来
+    Mux8Way16(a=u0, b=u1, c=u2, d=u3, e=u4, f=u5, g=u6, h=u7, sel= address, out= out);
+    //// Replace this comment with your code.
+}
