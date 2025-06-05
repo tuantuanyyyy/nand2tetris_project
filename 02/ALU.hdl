@@ -56,6 +56,7 @@ CHIP ALU {
     Mux16(a= zyout, b= nynot, sel= ny, out= nyout);
 
     //+ &
+    // notice: use nxout nyout because we need to consider negative numbers
     Add16(a = nxout, b = nyout, out = addout);
     And16(a = nxout , b= nyout, out= andout);
     Mux16(a= andout, b= addout, sel= f, out= fout);
@@ -64,22 +65,16 @@ CHIP ALU {
     Not16(in= fout, out= fno);
     Mux16(a= fout, b= fno, sel= no, out= fnoout);
     
-    //zr
+    //zr  is the output 0?
     Not16(in=fnoout, out=fnooutnot);
     Inc16(in=fnooutnot, out=finc);
     Or16(a=fnoout, b=finc, out[15]=prezrout);
     Not(in=prezrout, out=zr);
 
-    //ng
+
+    //ng  is the output negative?
     And16(a= fnoout, b= true, out[15]= ng);
 
     //out
-    Mux16(a= fout, b= fno, sel= no, out= out);
-
-
-
-
-
-    
-    //// Replace this comment with your code.
+    Mux16(a= fout, b= fnoout, sel= no, out= out);
 }
