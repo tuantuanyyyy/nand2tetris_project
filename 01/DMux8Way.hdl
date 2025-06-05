@@ -23,5 +23,4 @@ CHIP DMux8Way {
     DMux(in=u2, sel=sel[0], a=c, b=d);
     DMux(in=u3, sel=sel[0], a=e, b=f);
     DMux(in=u4, sel=sel[0], a=g, b=h);
-    //// Replace this comment with your code.
 }

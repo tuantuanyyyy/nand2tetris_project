@@ -5,12 +5,21 @@
 /**
  * Not gate:
  * if (in) out = 0, else out = 1
+ *
+ *Nand(A,B) = (AB)'    if A = B , Nand(A, A) = (AA)' = A'
+ *
+ *
+ *
  */
 CHIP Not {
     IN in;
     OUT out;
 
     PARTS:
-    Nand(a= in, b= true, out= out);
-    //// Replace this comment with your code.
+    //1.
+    //Nand(a= in, b= true, out= out);
+    
+    //2.
+    Nand(a= in, b= in, out= out);
+
 }

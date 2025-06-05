@@ -5,6 +5,12 @@
 /**
  * And gate:
  * if (a and b) out = 1, else out = 0 
+
+
+    A NAND B = NOT(A AND B)
+    so
+    NOT(A NAND B) = NOT( NOT(A AND B)) = A AND B
+ 
  */
 CHIP And {
     IN a, b;

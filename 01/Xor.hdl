@@ -5,6 +5,10 @@
 /**
  * Exclusive-or gate:
  * if ((a and Not(b)) or (Not(a) and b)) out = 1, else out = 0
+    a xor b = ab' + a'b   (direct is its definition, 
+                        because it's relatively simple and few cases)
+    you can also build it using only nand gate, it;s difficult
+
  */
 CHIP Xor {
     IN a, b;

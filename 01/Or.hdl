@@ -5,6 +5,9 @@
 /**
  * Or gate:
  * if (a or b) out = 1, else out = 0 
+    a+b = ((a+b)')' = (a' * b')'
+    so
+    a or b = nand(a', b')
  */
 CHIP Or {
     IN a, b;

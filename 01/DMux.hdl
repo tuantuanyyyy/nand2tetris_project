@@ -6,14 +6,19 @@
  * Demultiplexor:
  * [a, b] = [in, 0] if sel = 0
  *          [0, in] if sel = 1
+    
+    if we think about the logic of dmux itself,
+    we can know the following relationship:
+    a = in and not(sel)
+    b = in and sel
  */
 CHIP DMux {
     IN in, sel;
     OUT a, b;
 
     PARTS:
-    Not(in= sel, out= selno);
-    And(a= in, b= selno, out= a);
+    Not(in= sel, out= seln);
+    And(a= in, b= seln, out= a);
     And(a= in, b= sel, out= b);
     //// Replace this comment with your code.
 }
